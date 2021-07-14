@@ -4,3 +4,6 @@ spring:
     prefix: classpath:templates/
     suffix: .html
 
+currency:
+  accessKey : 020fbc562ffee7369373d7697d17f8b2
+  endPoint : http://api.currencylayer.com/
