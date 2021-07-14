@@ -11,13 +11,13 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/live-currency")
 @RequiredArgsConstructor
 public class ApiController {
 
     private final ExRateService exRateService;
 
-    @GetMapping("/live-currency/{key}")
+    @GetMapping("/{key}")
     public Map<String, Object> getLiveCurrency(@PathVariable("key") final String key){
         ExRateDto.ResponseReq res = exRateService.retrieveExRate(key);
         Map<String, Object> result = new HashMap<>();
