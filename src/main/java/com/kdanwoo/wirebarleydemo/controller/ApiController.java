@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -21,7 +22,12 @@ public class ApiController {
 
     @GetMapping("/live-currency")
     public Map<String, Object> getLiveCurrency(@RequestParam ExRateDto.RetrieveReq req){
-        exRateService.retrieveExRate(req);
+        ExRateDto.ResponseReq res = exRateService.retrieveExRate(req);
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("res",res.getQuotes());
+
+        return result;
     }
 
 }

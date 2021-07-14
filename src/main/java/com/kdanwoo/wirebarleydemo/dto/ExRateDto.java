@@ -23,11 +23,8 @@ public class ExRateDto {
         private String privacy;
         private Long timestamp;
         private String source;
-        private
+        private Object quotes;
 
-        "quotes":{
-            "USDKRW":1148.560006
-        }
     }
 
 
