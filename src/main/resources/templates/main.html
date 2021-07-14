@@ -3,41 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>WirebarleyDemo</title>
-    <style>
-        div{
-            padding:10px;
-        }
-        span{
-            display:inline-block;
-            width:10%;
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero-unit">
-            <h1>환율계산</h1>
-            <hr />
-            <div>
-                <strong><span th:text="Name"></span></strong>
-<!--                <span th:text="${employee.name}"></span>-->
-            </div>
-            <div>
-                <strong><span th:text="Address"></span></strong>
-<!--                <span th:text="${employee.address}"></span>-->
-            </div>
-            <div>
-                <strong><span th:text="Married"></span></strong>
-<!--                <span th:text="${employee.married}"></span>-->
-            </div>
-            <div>
-                <strong><span th:text="Permanent"></span></strong>
-<!--                <span th:text="${employee.permanent} ? 'Yes' : 'No'"></span>-->
-            </div>
-            <p>
-                <a href="/signup" th:href="@{/signup}" class="btn btn-large btn-success">Submit</a>
-            </p>
-        </div>
+<div class="wrap">
+    <div class="bottom">
+        <h1>환율 계산</h1>
+
+        <h3>송금국가: 미국(USD)</h3>
+        <h3>수취국가:
+            <select id="country"> <!-- select box 사용 한국, 일본 필리핀 -->
+                <option title="USDKRW" value="" selected="selected">한국(KRW)</option>
+                <option title="USDJPY" value="">일본(JPN)</option>
+                <option title="USDPHP" value="">필리핀(PHP)</option>
+            </select>
+        </h3>
     </div>
+    <div id="id_c" class="bottom">
+        <h3 id="current">환율:</h3>
+    </div>
+    <div class="bottom">
+        <h3>송금액: <input id="deposite" type="number" value="100">USD</h3>
+        <button type="button" id="submit">Submit</button>
+        <h3 id="total"></h3>
+    </div>
+</div>
 </body>
 </html>

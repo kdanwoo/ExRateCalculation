@@ -22,16 +22,6 @@ public class ViewController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("main"); //화면 View설정
 
-        List<String> list = Stream.of(Country.values())
-                .map(m-> m.getName())
-                .collect(Collectors.toList());
-
-        Map<String, Object> dataMap = new HashMap<>();
-
-        dataMap.put("country",list);
-
-        mv.addObject("data",dataMap);
-
         return mv;
     }
 }
