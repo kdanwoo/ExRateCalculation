@@ -8,15 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ExRateServiceImpl implements ExRateService {
-
-    private final RestTemplate restTemplate;
 
     @Value("${currency.url}")
     private String BASE_URL;
@@ -32,10 +29,12 @@ public class ExRateServiceImpl implements ExRateService {
 
 
     @Override
-    public ExRateDto.ResponseReq retrieveExRate(ExRateDto.RetrieveReq retrieveReq) {
+    public ExRateDto.ResponseReq retrieveExRate(String retrieveReq) {
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("currencies", retrieveReq.getCurrencies());
+        //params.add("currencies", retrieveReq.getCurrencies());
+        params.add("access_key",ACCESS_KEY);
+        params.add("currencies", "KRW");
         params.add("source", source);
         params.add("format", format);
 
