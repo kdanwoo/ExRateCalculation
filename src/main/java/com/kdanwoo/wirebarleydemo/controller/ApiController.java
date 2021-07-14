@@ -17,7 +17,7 @@ public class ApiController {
 
     private final ExRateService exRateService;
 
-    @GetMapping("/{key}")
+    @RequestMapping(value = "/{key}", method = RequestMethod.GET)
     public Map<String, Object> getLiveCurrency(@PathVariable("key") final String key){
         ExRateDto.ResponseReq res = exRateService.retrieveExRate(key);
         Map<String, Object> result = new HashMap<>();
