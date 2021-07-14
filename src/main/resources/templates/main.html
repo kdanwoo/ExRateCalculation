@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WirebarleyDemo</title>
+    <style>
+        div{
+            padding:10px;
+        }
+        span{
+            display:inline-block;
+            width:10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-unit">
+            <h1>환율계산</h1>
+            <hr />
+            <div>
+                <strong><span th:text="Name"></span></strong>
+<!--                <span th:text="${employee.name}"></span>-->
+            </div>
+            <div>
+                <strong><span th:text="Address"></span></strong>
+<!--                <span th:text="${employee.address}"></span>-->
+            </div>
+            <div>
+                <strong><span th:text="Married"></span></strong>
+<!--                <span th:text="${employee.married}"></span>-->
+            </div>
+            <div>
+                <strong><span th:text="Permanent"></span></strong>
+<!--                <span th:text="${employee.permanent} ? 'Yes' : 'No'"></span>-->
+            </div>
+            <p>
+                <a href="/signup" th:href="@{/signup}" class="btn btn-large btn-success">Submit</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
