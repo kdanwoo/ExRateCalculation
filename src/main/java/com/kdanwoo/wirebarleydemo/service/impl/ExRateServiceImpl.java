@@ -1,6 +1,7 @@
 package com.kdanwoo.wirebarleydemo.service.impl;
 
 import com.kdanwoo.wirebarleydemo.service.ExRateService;
+import com.kdanwoo.wirebarleydemo.utils.JsonUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
@@ -9,6 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -29,7 +35,7 @@ public class ExRateServiceImpl implements ExRateService {
 
 
     @Override
-    public JSONObject retrieveExRate(String key) {
+    public String retrieveExRate(String key) {
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("access_key",ACCESS_KEY);
@@ -44,7 +50,23 @@ public class ExRateServiceImpl implements ExRateService {
                 ).retrieve().bodyToMono(JSONObject.class)
                 .block();
 
-        return res;
+        Map<String, Object> result = new HashMap<>();
+        result = null;
+        String keyValue = null;
+        String response = null;
+
+        if (res != null) {
+            result = (Map<String, Object>) JsonUtil.getMapFromJsonObject(res).get("quotes");
+            Set set = result.keySet();
+            Iterator iterator = set.iterator();
+            while(iterator.hasNext()){
+                keyValue = (String)iterator.next();
+            }
+
+            response = String.valueOf(result.get(keyValue));
+
+        }
+        return response;
 
     }
 
