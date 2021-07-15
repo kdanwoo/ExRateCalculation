@@ -45,11 +45,11 @@
             key : e
         };
         $.ajax({
-            url: "/getcurrency/live",
+            url: "/api/v1/exrate",
             data : data,
             type : "GET",
         }).done(function (response){
-            realtimeCur  = response;
+            realtimeCur  = response.result;
             $("#todayRate").text(realtimeCur).css("color", "blue");
         }).fail(function (response){
             alert('서버 오류')
