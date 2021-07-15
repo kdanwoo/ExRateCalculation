@@ -12,16 +12,15 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@RequestMapping("/getcurrency")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ApiController {
 
     private final ExRateService exRateService;
 
-    @RequestMapping(value = "/live", method = RequestMethod.GET)
-    public double getLiveCurrency(@RequestParam(value="key") final String key){
+    @RequestMapping(value = "/v1/exrate", method = RequestMethod.GET)
+    public double getLiveCurrency(@RequestParam(value="key",required = true) final String key){
         return exRateService.retrieveExRate(key);
     }
-
 
 }
