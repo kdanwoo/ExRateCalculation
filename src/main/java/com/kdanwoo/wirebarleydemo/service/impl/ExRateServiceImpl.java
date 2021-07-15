@@ -35,7 +35,7 @@ public class ExRateServiceImpl implements ExRateService {
 
 
     @Override
-    public String retrieveExRate(String key) {
+    public double retrieveExRate(String key) {
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("access_key",ACCESS_KEY);
@@ -53,7 +53,7 @@ public class ExRateServiceImpl implements ExRateService {
         Map<String, Object> result = new HashMap<>();
         result = null;
         String keyValue = null;
-        String response = null;
+        double realtimeCur = 0;
 
         if (res != null) {
             result = (Map<String, Object>) JsonUtil.getMapFromJsonObject(res).get("quotes");
@@ -63,10 +63,9 @@ public class ExRateServiceImpl implements ExRateService {
                 keyValue = (String)iterator.next();
             }
 
-            response = String.valueOf(result.get(keyValue));
-
+            realtimeCur = Double.parseDouble(String.valueOf(result.get(keyValue)));
         }
-        return response;
+        return realtimeCur;
 
     }
 

@@ -19,7 +19,7 @@ public class ApiController {
     private final ExRateService exRateService;
 
     @RequestMapping(value = "/live", method = RequestMethod.GET)
-    public String getLiveCurrency(@RequestParam(value="key") final String key){
+    public double getLiveCurrency(@RequestParam(value="key") final String key){
         return exRateService.retrieveExRate(key);
     }
 

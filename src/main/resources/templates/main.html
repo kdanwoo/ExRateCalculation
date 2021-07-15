@@ -28,15 +28,19 @@
             <label>송금액 :</label>
             <input type="text" id="sendMoney" name="sendMoney">
         </div>
-    <button onclick="calRate()">Submit</button>
+        <button onclick="calRate()">Submit</button>
     <div>
-        <span id="showRes"></span>
+        <p id="message"></p>
     </div>
 </div>
 </body>
 <script>
 
+    let realtimeCur;
+    let country;
+
     function categoryChange(e){
+        country = e;
         let data = {
             key : e
         };
@@ -45,15 +49,26 @@
             data : data,
             type : "GET",
         }).done(function (response){
-            let result = response.res;
-            console.log(result);
+            realtimeCur  = response;
+            $("#todayRate").text(realtimeCur).css("color", "blue");
         }).fail(function (response){
             alert('서버 오류')
             return false;
         });
-
     }
 
+    function calRate(){
+        let sendMoney = $("#sendMoney").val();
+
+        if (sendMoney >= 0 && sendMoney <= 10000) {
+            var result = realtimeCur * sendMoney;
+            result = result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $("#message").text("수취금액은 " + result + " " + country + " 입니다.").css("color","black");
+            return;
+        }
+
+        $("#message").text("송금액이 바르지 않습니다.").css("color", "red");
+    }
 
 
 </script>
