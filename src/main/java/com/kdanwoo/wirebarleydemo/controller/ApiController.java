@@ -22,7 +22,6 @@ public class ApiController {
     public Map<String, Object> getLiveCurrency(@RequestParam(value="key") final String key){
         JSONObject res = exRateService.retrieveExRate(key);
         Map<String, Object> result = new HashMap<>();
-
         result.put("res",res.get("quotes"));
 
         return result;

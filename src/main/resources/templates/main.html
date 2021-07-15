@@ -5,26 +5,32 @@
     <title>WirebarleyDemo</title>
 </head>
 <body>
-<div class="wrap">
-    <div class="bottom">
+<div>
+    <form name="rateForm" id="rateForm" action="">
         <h1>환율 계산</h1>
-
-        <h3>송금국가: 미국(USD)</h3>
-        <h3>수취국가:
-            <select id="country"> <!-- select box 사용 한국, 일본 필리핀 -->
-                <option title="USDKRW" value="KRW" selected="selected">한국(KRW)</option>
-                <option title="USDJPY" value="JPY">일본(JPN)</option>
-                <option title="USDPHP" value="PHP">필리핀(PHP)</option>
+        <div>
+            <label><h3>송금국가: 미국(USD)</h3></label>
+        </div>
+        <div>
+            <label>수취국가</label>
+            <select id="country" onchange="getRateByCountry(this.value)"> <!-- select box 사용 한국, 일본 필리핀 -->
+                <option th:title="USDKRW" th:value="KRW" th:selected="selected">한국(KRW)</option>
+                <option th:title="USDJPY" th:value="JPY">일본(JPN)</option>
+                <option th:title="USDPHP" th:value="PHP">필리핀(PHP)</option>
             </select>
-        </h3>
-    </div>
-    <div id="id_c" class="bottom">
-        <h3 id="current">환율:</h3>
-    </div>
-    <div class="bottom">
-        <h3>송금액: <input id="deposite" type="number" value="100">USD</h3>
-        <button type="button" id="submit">Submit</button>
-        <h3 id="total"></h3>
+        </div>
+        <div>
+            <label><h3> 환율 : <span id="todayRate"></span></h3></label>
+            <input type="hidden" id="apiRate" th:value="0"/>
+        </div>
+        <div>
+            <label>송금액 :</label>
+            <input type="text" id="result" name="result">
+        </div>
+    </form>
+    <button onclick="calRate();">Submit</button>
+    <div>
+        <span id="showRes"></span>
     </div>
 </div>
 </body>
