@@ -44,7 +44,6 @@ public class ExRateServiceImpl implements ExRateService {
                 ).retrieve().bodyToMono(JSONObject.class)
                 .block();
 
-
         return res;
 
     }
