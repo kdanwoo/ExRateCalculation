@@ -4,6 +4,7 @@ import com.kdanwoo.wirebarleydemo.dto.ExRateDto;
 import com.kdanwoo.wirebarleydemo.service.ExRateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -11,20 +12,21 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@RequestMapping("/live-currency")
+@RequestMapping("/getcurrency")
 @RequiredArgsConstructor
 public class ApiController {
 
     private final ExRateService exRateService;
 
-    @RequestMapping(value = "/{key}", method = RequestMethod.GET)
+    @RequestMapping(value = "/live", method = RequestMethod.GET)
     public Map<String, Object> getLiveCurrency(@PathVariable("key") final String key){
-        ExRateDto.ResponseReq res = exRateService.retrieveExRate(key);
+        JSONObject res = exRateService.retrieveExRate(key);
         Map<String, Object> result = new HashMap<>();
 
-        result.put("res",res.getQuotes());
+        result.put("res",res.get("quotes"));
 
         return result;
     }
+
 
 }

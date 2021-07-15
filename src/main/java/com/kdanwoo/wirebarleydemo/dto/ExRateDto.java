@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.json.simple.JSONObject;
 
 import java.sql.Timestamp;
 
@@ -17,13 +18,15 @@ public class ExRateDto {
     }
 
     @Getter
-    public static class ResponseReq{
+    public static class Res{
         private Boolean success;
         private String terms;
         private String privacy;
         private Long timestamp;
         private String source;
         private Object quotes;
+
+
 
     }
 

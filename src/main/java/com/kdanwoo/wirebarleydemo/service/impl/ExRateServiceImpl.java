@@ -1,9 +1,9 @@
 package com.kdanwoo.wirebarleydemo.service.impl;
 
-import com.kdanwoo.wirebarleydemo.dto.ExRateDto;
 import com.kdanwoo.wirebarleydemo.service.ExRateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -29,21 +29,25 @@ public class ExRateServiceImpl implements ExRateService {
 
 
     @Override
-    public ExRateDto.ResponseReq retrieveExRate(String retrieveReq) {
+    public JSONObject retrieveExRate(String key) {
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        //params.add("currencies", retrieveReq.getCurrencies());
         params.add("access_key",ACCESS_KEY);
-        params.add("currencies", "KRW");
+        params.add("currencies", key);
         params.add("source", source);
         params.add("format", format);
 
-        ExRateDto.ResponseReq res = WebClient.create(BASE_URL).get()
+        JSONObject res = WebClient.create(BASE_URL).get()
                 .uri(uriBuilder ->
                         uriBuilder.path(ENDPOINT)
                                 .queryParams(params).build()
-                ).retrieve().bodyToMono(ExRateDto.ResponseReq.class)
+                ).retrieve().bodyToMono(JSONObject.class)
                 .block();
+
+
         return res;
+
     }
+
+
 }

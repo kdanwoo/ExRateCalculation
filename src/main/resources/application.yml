@@ -6,7 +6,7 @@ spring:
 
 currency:
   accessKey : 020fbc562ffee7369373d7697d17f8b2
-  url: http://api.currencylayer.com/
-  endPoint : live?
+  url: http://apilayer.net/api
+  endPoint : /live
 
 

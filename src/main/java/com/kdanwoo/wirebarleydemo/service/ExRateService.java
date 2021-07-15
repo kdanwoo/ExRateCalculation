@@ -1,7 +1,7 @@
 package com.kdanwoo.wirebarleydemo.service;
 
-import com.kdanwoo.wirebarleydemo.dto.ExRateDto;
+import org.json.simple.JSONObject;
 
 public interface ExRateService {
-    ExRateDto.ResponseReq retrieveExRate(String key);
+    JSONObject retrieveExRate(String key);
 }
