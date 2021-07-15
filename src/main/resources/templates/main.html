@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <title>WirebarleyDemo</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <body>
 <div>
-    <form name="rateForm" id="rateForm" action="">
         <h1>환율 계산</h1>
         <div>
             <label><h3>송금국가: 미국(USD)</h3></label>
         </div>
         <div>
             <label>수취국가</label>
-            <select id="country" onchange="getRateByCountry(this.value)"> <!-- select box 사용 한국, 일본 필리핀 -->
-                <option th:title="USDKRW" th:value="KRW" th:selected="selected">한국(KRW)</option>
-                <option th:title="USDJPY" th:value="JPY">일본(JPN)</option>
-                <option th:title="USDPHP" th:value="PHP">필리핀(PHP)</option>
+            <select id="country" onchange="categoryChange(this.value)"> <!-- select box 사용 한국, 일본 필리핀 -->
+                <option value="">송금국가선택</option>
+                <option title="USDKRW" value="KRW">한국(KRW)</option>
+                <option title="USDJPY" value="JPY">일본(JPN)</option>
+                <option title="USDPHP" value="PHP">필리핀(PHP)</option>
             </select>
         </div>
         <div>
@@ -25,13 +26,35 @@
         </div>
         <div>
             <label>송금액 :</label>
-            <input type="text" id="result" name="result">
+            <input type="text" id="sendMoney" name="sendMoney">
         </div>
-    </form>
-    <button onclick="calRate();">Submit</button>
+    <button onclick="calRate()">Submit</button>
     <div>
         <span id="showRes"></span>
     </div>
 </div>
 </body>
+<script>
+
+    function categoryChange(e){
+        let data = {
+            key : e
+        };
+        $.ajax({
+            url: "/getcurrency/live",
+            data : data,
+            type : "GET",
+        }).done(function (response){
+            let result = response.res;
+            console.log(result);
+        }).fail(function (response){
+            alert('서버 오류')
+            return false;
+        });
+
+    }
+
+
+
+</script>
 </html>
